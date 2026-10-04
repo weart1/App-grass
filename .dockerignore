@@ -1,0 +1,14 @@
+**/node_modules
+**/.next
+**/.expo
+**/dist
+**/coverage
+.git
+**/.env
+**/.env.*
+!**/.env.example
+deploy/.env
+deploy/backups
+# The API image doesn't need the mobile app, only its manifest (for the lockfile).
+apps/mobile
+!apps/mobile/package.json

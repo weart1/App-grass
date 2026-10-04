@@ -1,8 +1,14 @@
+import path from 'node:path';
+
 import type { NextConfig } from 'next';
 
 const isDev = process.env.NODE_ENV === 'development';
 
 const nextConfig: NextConfig = {
+  // Self-contained server bundle for the Docker image (deploy/api.Dockerfile).
+  output: 'standalone',
+  // Monorepo: trace workspace packages from the repo root.
+  outputFileTracingRoot: path.join(__dirname, '../..'),
   // Workspace packages ship TypeScript source; let Next compile them.
   transpilePackages: ['@leafy/shared'],
   poweredByHeader: false,

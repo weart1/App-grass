@@ -36,3 +36,5 @@ android/
 .DS_Store
 *.log
 .turbo/
+deploy/.env
+deploy/backups/

@@ -101,7 +101,10 @@ Each app has a `.env.example`. **Never commit real values.**
 
 The API runs on the owner's **DigitalOcean VPS** in Docker (API + PostgreSQL + Redis +
 Caddy for HTTPS). Photos are stored in **DigitalOcean Spaces**. See DECISIONS.md
-D-021. Step-by-step server setup arrives with Phase 2.
+D-021.
+
+**Step-by-step server setup (in Russian): [deploy/README.md](./deploy/README.md).** The stack is
+defined in `deploy/docker-compose.yml`; updates are one command: `deploy/scripts/deploy.sh`.
 
 ## Conventions
 

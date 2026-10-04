@@ -1,0 +1,10 @@
+# Caddy obtains and renews the HTTPS certificate for this domain automatically.
+{$API_DOMAIN} {
+	encode zstd gzip
+	reverse_proxy api:3000
+	header {
+		Strict-Transport-Security "max-age=31536000"
+		X-Content-Type-Options nosniff
+		-Server
+	}
+}
