@@ -1,0 +1,27 @@
+{
+  "name": "leafy",
+  "private": true,
+  "packageManager": "pnpm@10.28.0",
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "scripts": {
+    "dev": "pnpm --parallel --filter @leafy/mobile --filter @leafy/api dev",
+    "dev:mobile": "pnpm --filter @leafy/mobile dev",
+    "dev:api": "pnpm --filter @leafy/api dev",
+    "lint": "pnpm -r --no-bail lint",
+    "typecheck": "pnpm -r typecheck",
+    "test": "pnpm -r test",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "check": "pnpm typecheck && pnpm lint && pnpm test",
+    "db:migrate": "pnpm --filter @leafy/api db:migrate",
+    "db:seed": "pnpm --filter @leafy/api db:seed"
+  },
+  "devDependencies": {
+    "eslint": "^9.39.5",
+    "prettier": "^3.9.9",
+    "typescript": "~6.0.3",
+    "typescript-eslint": "^8.71.0"
+  }
+}

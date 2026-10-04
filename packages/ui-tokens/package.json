@@ -1,0 +1,23 @@
+{
+  "name": "@leafy/ui-tokens",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Leafy design tokens: colors, typography, spacing, radius, shadows, motion.",
+  "main": "src/index.ts",
+  "types": "src/index.ts",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "sideEffects": false,
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint .",
+    "test": "vitest run"
+  },
+  "devDependencies": {
+    "eslint": "^9.39.5",
+    "typescript": "~6.0.3",
+    "typescript-eslint": "^8.71.0",
+    "vitest": "^5.0.3"
+  }
+}

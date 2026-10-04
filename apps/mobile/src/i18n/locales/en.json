@@ -1,0 +1,413 @@
+{
+  "common": {
+    "actions": {
+      "retry": "Try again",
+      "cancel": "Cancel",
+      "confirm": "Confirm",
+      "done": "Done",
+      "save": "Save",
+      "close": "Close",
+      "back": "Back",
+      "seeAll": "See all",
+      "more": "more",
+      "delete": "Delete",
+      "edit": "Edit",
+      "share": "Share",
+      "next": "Next",
+      "skip": "Skip",
+      "continue": "Continue",
+      "dismiss": "Dismiss"
+    },
+    "loading": "Loading",
+    "offline": "You're offline — showing saved data",
+    "optional": "Optional",
+    "phase": "Phase {{phase}}",
+    "comingInPhase": "Coming in Phase {{phase}}",
+    "error": {
+      "title": "Something went wrong",
+      "body": "We couldn't load this right now. Check your connection and try again."
+    },
+    "timeAgo": {
+      "now": "now",
+      "minutes": "{{count}}m",
+      "hours": "{{count}}h",
+      "days": "{{count}}d",
+      "weeks": "{{count}}w"
+    },
+    "charCount": "{{count}}/{{max}}"
+  },
+  "tabs": {
+    "garden": "My Garden",
+    "community": "Community",
+    "scan": "Scan",
+    "care": "Care",
+    "profile": "Profile",
+    "scanA11yHint": "Opens the camera to identify a plant",
+    "careBadge_one": "{{count}} task due today",
+    "careBadge_other": "{{count}} tasks due today"
+  },
+  "garden": {
+    "title": "My Garden",
+    "subtitleEmpty": "No plants yet",
+    "searchA11y": "Search my plants",
+    "addA11y": "Add a plant",
+    "emptyTitle": "Your garden is empty",
+    "emptyBody": "Scan a plant or add one manually to start tracking its growth, care and progress.",
+    "scanCta": "Scan a plant",
+    "addCta": "Add manually"
+  },
+  "community": {
+    "title": "Community",
+    "searchA11y": "Search",
+    "notificationsA11y": "Notifications",
+    "createA11y": "Create post",
+    "emptyTitle": "Your feed is about to sprout",
+    "emptyBody": "Posts from growers you follow and trending green wins will appear here.",
+    "createCta": "Create a post"
+  },
+  "care": {
+    "title": "Care",
+    "subtitle": "Watering, feeding and more",
+    "today": "Today",
+    "emptyTitle": "All caught up! 🌿",
+    "emptyBody": "Tasks from your plants' care schedules will appear here, with reminders at the time you choose.",
+    "addPlantCta": "Add a plant"
+  },
+  "profile": {
+    "title": "Profile",
+    "settingsA11y": "Settings",
+    "guestName": "Your profile",
+    "guestBody": "Sign-in arrives in Phase 2. Your posts, public garden, saved posts and scan history will live here.",
+    "devMenu": "Developer menu",
+    "devMenuHint": "Component gallery, route index and API status",
+    "signInCta": "Sign in"
+  },
+  "scan": {
+    "title": "Scanner",
+    "body": "Live camera, multi-angle capture and the Identify, Diagnose and Toxicity modes arrive in Phase 3.",
+    "closeA11y": "Close scanner",
+    "previewProcessing": "Preview: processing",
+    "previewResult": "Preview: report",
+    "history": "Scan history"
+  },
+  "routes": {
+    "onboarding": {
+      "title": "Welcome",
+      "body": "Three swipeable intro slides — identify plants, smart reminders, share your green wins — then “Get started”."
+    },
+    "permissions": {
+      "title": "Permissions",
+      "body": "Friendly explanation cards for camera (required for scanning) and notifications (watering reminders)."
+    },
+    "signIn": {
+      "title": "Sign in",
+      "body": "Continue with Apple, Google or email."
+    },
+    "verifyCode": {
+      "title": "Enter code",
+      "body": "6-digit one-time code with auto-advance and a 30-second resend timer."
+    },
+    "profileSetup": {
+      "title": "Set up your profile",
+      "body": "Avatar, display name, unique @username, climate zone and experience level."
+    },
+    "scanProcessing": {
+      "title": "Analyzing",
+      "body": "Blurred photo backdrop, animated leaf ring and rotating status messages while the AI works."
+    },
+    "scanResult": {
+      "title": "Plant report",
+      "body": "Identification, safety for people, children and pets, usefulness, care guide and growing timeline."
+    },
+    "scanHistory": {
+      "title": "Scan history",
+      "body": "Past scans grouped by date, with search and Toxic / Edible / Diagnoses filters."
+    },
+    "plantNew": {
+      "title": "Add plant",
+      "body": "Photo → species → details → AI-suggested care schedule → review."
+    },
+    "plantDetail": {
+      "title": "Plant",
+      "body": "Growth progress, and Overview / Care / Journal / Health sections."
+    },
+    "plantEdit": {
+      "title": "Edit plant",
+      "body": "Nickname, space, indoor/outdoor, planting details."
+    },
+    "journalNew": {
+      "title": "New journal entry",
+      "body": "Growth photo, note and tag (new leaf, first flower, harvest…)."
+    },
+    "plantSchedule": {
+      "title": "Care schedule",
+      "body": "Task frequencies, reminder time and seasonal adjustments."
+    },
+    "postNew": {
+      "title": "New post",
+      "body": "Pick and crop photos, write a caption, link a plant and choose a category."
+    },
+    "postDetail": {
+      "title": "Post",
+      "body": "Full post with comments, one level of replies and @mentions."
+    },
+    "userProfile": {
+      "title": "Profile",
+      "body": "Another grower's posts and public garden, with Follow."
+    },
+    "notifications": {
+      "title": "Notifications",
+      "body": "Likes, comments, replies, follows, mentions and care reminders."
+    },
+    "search": {
+      "title": "Search",
+      "body": "Plants, posts and users, with recent searches and trending hashtags."
+    },
+    "settings": {
+      "title": "Settings",
+      "body": "Account, notifications, privacy, units, language, help and about."
+    },
+    "settingsAccount": {
+      "title": "Account",
+      "body": "Email, sign-in methods and account deletion."
+    },
+    "settingsNotifications": {
+      "title": "Notifications",
+      "body": "Care reminders on/off and time, community activity."
+    },
+    "settingsPrivacy": {
+      "title": "Privacy",
+      "body": "Private account and garden visibility."
+    },
+    "settingsUnits": {
+      "title": "Units",
+      "body": "°C / °F and metric / imperial."
+    },
+    "settingsAbout": {
+      "title": "About",
+      "body": "Version, terms and privacy policy."
+    },
+    "notFound": {
+      "title": "Page not found",
+      "body": "This screen doesn't exist. Let's get you back to your garden.",
+      "cta": "Go to My Garden"
+    },
+    "param": "{{name}}: {{value}}"
+  },
+  "components": {
+    "dangerMeter": {
+      "label": "Danger level",
+      "a11y": "Danger level: {{level}}, {{position}} of {{total}}"
+    },
+    "safety": {
+      "safe": "Safe",
+      "low": "Low",
+      "moderate": "Moderate",
+      "high": "High",
+      "severe": "Severe"
+    },
+    "usefulness": {
+      "edible": "Edible",
+      "medicinal": "Medicinal",
+      "decorative": "Decorative",
+      "air_purifying": "Air-purifying",
+      "pollinator_friendly": "Pollinator-friendly",
+      "aromatic": "Aromatic",
+      "companion": "Companion plant"
+    },
+    "stage": {
+      "seed": "Seed",
+      "sprout": "Sprout",
+      "growing": "Growing",
+      "flowering": "Flowering",
+      "fruiting": "Fruiting",
+      "dormant": "Dormant"
+    },
+    "task": {
+      "water": "Water",
+      "fertilize": "Fertilize",
+      "mist": "Mist",
+      "prune": "Prune",
+      "rotate": "Rotate",
+      "repot": "Repot",
+      "custom": "Task"
+    },
+    "due": {
+      "today": "{{task}} today",
+      "tomorrow": "{{task}} tomorrow",
+      "inDays_one": "{{task}} in {{count}} day",
+      "inDays_other": "{{task}} in {{count}} days",
+      "overdue_one": "Overdue {{count}}d",
+      "overdue_other": "Overdue {{count}}d"
+    },
+    "careTask": {
+      "title": "{{task}} {{plant}}",
+      "markDone": "Mark {{title}} as done",
+      "markUndone": "Mark {{title}} as not done"
+    },
+    "health": {
+      "good": "Healthy",
+      "attention": "Needs attention",
+      "critical": "Unwell"
+    },
+    "experience": {
+      "beginner": "Beginner",
+      "hobbyist": "Hobbyist",
+      "expert": "Expert"
+    },
+    "post": {
+      "like": "Like",
+      "unlike": "Unlike",
+      "comment": "Comment",
+      "share": "Share",
+      "save": "Save",
+      "unsave": "Remove from saved",
+      "moreOptions": "More options",
+      "likes_one": "{{formatted}} like",
+      "likes_other": "{{formatted}} likes",
+      "viewComments_one": "View {{count}} comment",
+      "viewComments_other": "View all {{count}} comments",
+      "photoOf": "Photo {{index}} of {{total}}",
+      "plantDay": "{{plant}} · Day {{day}}",
+      "doubleTapHint": "Double-tap to like"
+    },
+    "stepper": {
+      "decrease": "Decrease",
+      "increase": "Increase"
+    },
+    "frequency": {
+      "days_one": "Every day",
+      "days_other": "Every {{count}} days",
+      "weeks_one": "Every week",
+      "weeks_other": "Every {{count}} weeks"
+    },
+    "dateField": {
+      "placeholder": "Pick a date"
+    },
+    "select": {
+      "placeholder": "Select…"
+    },
+    "progress": {
+      "a11y": "{{percent}}% complete"
+    },
+    "plantCard": {
+      "noPhoto": "No photo yet",
+      "health": "Health: {{status}}"
+    }
+  },
+  "dev": {
+    "title": "Developer",
+    "components": "Component gallery",
+    "componentsHint": "Every design-system component and state",
+    "routes": "Route index",
+    "routesHint": "Jump to any screen, including placeholders",
+    "api": "API status",
+    "apiChecking": "Checking {{url}}…",
+    "apiOk": "Connected to {{service}} ({{version}})",
+    "apiError": "Can't reach {{url}} — {{message}}",
+    "apiBadge": {
+      "ok": "Online",
+      "error": "Offline",
+      "pending": "Checking"
+    },
+    "sections": {
+      "typography": "Typography",
+      "colors": "Colors",
+      "buttons": "Buttons",
+      "iconButtons": "Icon buttons",
+      "chips": "Chips & badges",
+      "cards": "Cards",
+      "inputs": "Inputs",
+      "controls": "Controls",
+      "progress": "Progress",
+      "garden": "Garden",
+      "safety": "Safety & usefulness",
+      "feed": "Feed",
+      "feedback": "Feedback & overlays",
+      "states": "Empty, error & loading states",
+      "illustrations": "Illustrations"
+    },
+    "sample": {
+      "nickname": "Nickname",
+      "nicknamePlaceholder": "e.g. Tommy the Tomato",
+      "nicknameHelper": "Shown on your plant card",
+      "username": "Username",
+      "usernameError": "This username is taken",
+      "notes": "Notes",
+      "notesPlaceholder": "Anything worth remembering…",
+      "plantedOn": "Planted on",
+      "space": "Space",
+      "spaces": {
+        "balcony": "Balcony",
+        "kitchen": "Kitchen",
+        "greenhouse": "Greenhouse"
+      },
+      "waterEvery": "Water every",
+      "reminders": "Care reminders",
+      "remindersHint": "Push notification at your preferred time",
+      "seasonal": "Water less in winter",
+      "segments": {
+        "overview": "Overview",
+        "care": "Care",
+        "journal": "Journal",
+        "health": "Health"
+      },
+      "filters": {
+        "all": "All",
+        "indoor": "Indoor",
+        "outdoor": "Outdoor",
+        "vegetables": "Vegetables",
+        "herbs": "Herbs"
+      },
+      "growth": "Harvest window: Aug 10–25",
+      "growthBar": "Day 34 of ~60 to harvest",
+      "toastSuccess": "Watered Basil 💧",
+      "toastError": "Couldn't save. Try again.",
+      "toastInfo": "Reminder set for 8:00",
+      "showToast": "Success toast",
+      "openDialog": "Open dialog",
+      "openSheet": "Open bottom sheet",
+      "dialogTitle": "Delete this plant?",
+      "dialogBody": "Its care schedule and journal will be removed. This can't be undone.",
+      "sheetTitle": "Watering",
+      "sheetBody": "Water when the top 2–3 cm of soil feel dry. Basil prefers evenly moist soil; avoid soggy roots.",
+      "cardTitle": "Fun fact",
+      "cardBody": "Basil is a member of the mint family and can be propagated from cuttings in a glass of water.",
+      "loadingSkeletons": "Loading skeletons",
+      "emptyState": "Empty state",
+      "errorState": "Error state",
+      "offlineBanner": "Offline banner",
+      "typography": "Grow with smart reminders",
+      "buttons": {
+        "primary": "Add to My Garden",
+        "secondary": "Share",
+        "ghost": "Save report",
+        "destructive": "Delete plant",
+        "loading": "Saving",
+        "disabled": "Unavailable",
+        "small": "Edit"
+      },
+      "badges": {
+        "success": "92% match",
+        "warning": "Mildly toxic",
+        "danger": "Toxic to cats",
+        "info": "Water today",
+        "neutral": "Perennial"
+      },
+      "chip": "Houseplant",
+      "chipEmoji": "Cherry tomato · Day 45",
+      "progressRing": "34d",
+      "progressRingA11y": "Growth: flowering stage",
+      "activeHeart": "Liked",
+      "withBadge": "Notifications",
+      "onPhoto": "Close",
+      "safetyLevels": "All levels",
+      "routeGroups": "Phase {{phase}}",
+      "tabs": "Tabs",
+      "notFound": "Unknown route (404)",
+      "logo": "Logo & scan button",
+      "showErrorToast": "Error toast",
+      "showInfoToast": "Info toast"
+    }
+  }
+}

@@ -1,0 +1,38 @@
+# dependencies
+node_modules/
+
+# env (never commit real values; .env.example files are committed)
+.env
+.env*.local
+.env.development
+.env.production
+!.env.example
+
+# build output
+dist/
+build/
+.next/
+out/
+*.tsbuildinfo
+next-env.d.ts
+coverage/
+
+# expo
+.expo/
+expo-env.d.ts
+web-build/
+ios/
+android/
+*.jks
+*.p8
+*.p12
+*.key
+*.mobileprovision
+
+# vercel
+.vercel/
+
+# misc
+.DS_Store
+*.log
+.turbo/

@@ -1,0 +1,32 @@
+{
+  "name": "@leafy/api",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Leafy REST API (Next.js App Router, API-only) deployed on Vercel.",
+  "scripts": {
+    "dev": "next dev --port 3000",
+    "build": "next build",
+    "start": "next start --port 3000",
+    "typecheck": "next typegen && tsc --noEmit",
+    "lint": "eslint .",
+    "test": "vitest run",
+    "db:migrate": "node -e \"console.log('db:migrate arrives in Phase 2 (Drizzle + Neon).')\"",
+    "db:seed": "node -e \"console.log('db:seed arrives in Phase 8.')\""
+  },
+  "dependencies": {
+    "@leafy/shared": "workspace:*",
+    "next": "16.3.8",
+    "react": "19.2.3",
+    "react-dom": "19.2.3",
+    "zod": "^4.6.5"
+  },
+  "devDependencies": {
+    "@types/node": "^22.19.0",
+    "@types/react": "~19.2.2",
+    "@types/react-dom": "~19.2.2",
+    "eslint": "^9.39.5",
+    "eslint-config-next": "16.3.8",
+    "typescript": "~6.0.3",
+    "vitest": "^5.0.3"
+  }
+}
