@@ -5,7 +5,8 @@
 name: leafy
 
 services:
-  # Our Next.js API. Not exposed to the internet directly — Caddy sits in front.
+  # Our Next.js API. Published only on the server's localhost (127.0.0.1), so it
+  # isn't reachable from the internet directly — nginx (or Caddy) sits in front.
   api:
     build:
       context: ..
@@ -14,6 +15,8 @@ services:
         GIT_COMMIT_SHA: ${GIT_COMMIT_SHA:-dev}
     restart: unless-stopped
     env_file: .env
+    ports:
+      - '127.0.0.1:${API_PORT:-3010}:3000'
     environment:
       DATABASE_URL: postgres://leafy:${POSTGRES_PASSWORD}@postgres:5432/leafy
       REDIS_URL: redis://redis:6379
@@ -73,10 +76,13 @@ services:
       timeout: 5s
       retries: 5
 
-  # Web server in front of the API: gets free HTTPS certificates from
-  # Let's Encrypt for API_DOMAIN and renews them automatically.
+  # Optional web server for a server that has NOTHING else on ports 80/443:
+  # gets free HTTPS certificates automatically. Off by default — enable with
+  # COMPOSE_PROFILES=caddy in .env. On a server that already runs nginx, use
+  # deploy/nginx/leafy-api.conf instead (see deploy/README.md).
   caddy:
     image: caddy:2-alpine
+    profiles: ['caddy']
     restart: unless-stopped
     ports:
       - '80:80'
