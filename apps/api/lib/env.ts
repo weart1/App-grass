@@ -9,19 +9,30 @@ import { z } from 'zod';
  */
 const EnvSchema = z.object({
   NODE_ENV: z.enum(['development', 'test', 'production']).default('development'),
-  VERCEL_ENV: z.enum(['development', 'preview', 'production']).optional(),
-  VERCEL_GIT_COMMIT_SHA: z.string().optional(),
+  /** Git commit of the deployed build (set by the deploy script). */
+  GIT_COMMIT_SHA: z.string().optional(),
 
   AI_PROVIDER: z.enum(['mock', 'runware']).default('mock'),
   RUNWARE_API_KEY: z.string().min(1).optional(),
 
   DATABASE_URL: z.url().optional(),
-  BLOB_READ_WRITE_TOKEN: z.string().min(1).optional(),
-  UPSTASH_REDIS_REST_URL: z.url().optional(),
-  UPSTASH_REDIS_REST_TOKEN: z.string().min(1).optional(),
+  REDIS_URL: z.url().optional(),
+
+  // S3-compatible object storage (DigitalOcean Spaces) for photos.
+  S3_ENDPOINT: z.url().optional(),
+  S3_REGION: z.string().min(1).optional(),
+  S3_BUCKET: z.string().min(1).optional(),
+  S3_ACCESS_KEY_ID: z.string().min(1).optional(),
+  S3_SECRET_ACCESS_KEY: z.string().min(1).optional(),
+  S3_PUBLIC_URL: z.url().optional(),
 
   AUTH_SECRET: z.string().min(32).optional(),
   AUTH_URL: z.url().optional(),
+  // Google sign-in: the web client verifies tokens; iOS/Android IDs are accepted audiences.
+  GOOGLE_WEB_CLIENT_ID: z.string().min(1).optional(),
+  GOOGLE_CLIENT_SECRET: z.string().min(1).optional(),
+  GOOGLE_IOS_CLIENT_ID: z.string().min(1).optional(),
+  GOOGLE_ANDROID_CLIENT_ID: z.string().min(1).optional(),
 
   CRON_SECRET: z.string().min(16).optional(),
   EXPO_ACCESS_TOKEN: z.string().min(1).optional(),

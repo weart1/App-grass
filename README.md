@@ -1,7 +1,7 @@
 # Leafy 🌿
 
 Plant scanner, personal garden manager and plant-growing community.
-Expo (iOS + Android) app with a Next.js API on Vercel.
+Expo (iOS + Android) app with a Next.js API on a DigitalOcean server.
 
 - **Product spec:** [SPEC.md](./SPEC.md)
 - **Decisions & deviations:** [DECISIONS.md](./DECISIONS.md)
@@ -10,17 +10,17 @@ Expo (iOS + Android) app with a Next.js API on Vercel.
 
 ## Status
 
-| Phase | Scope | State |
-|---|---|---|
-| 1 | Foundation: monorepo, design system, `/dev/components`, tab bar, placeholder routes, API skeleton | ✅ Done |
-| 2 | Auth (Better Auth) & profile setup, DB schema + migrations, `/me` | ⏭ Next |
-| 3 | Scanner + mock AI → report → history, then the Runware adapter | |
-| 4 | My Garden | |
-| 5 | Care tab & notifications | |
-| 6 | Community | |
-| 7 | Profile & settings | |
-| 8 | Polish | |
-| 9 | Release prep | |
+| Phase | Scope                                                                                              | State   |
+| ----- | -------------------------------------------------------------------------------------------------- | ------- |
+| 1     | Foundation: monorepo, design system, `/dev/components`, tab bar, placeholder routes, API skeleton  | ✅ Done |
+| 2     | Server on DigitalOcean, Google sign-in (Better Auth), profile setup, DB schema + migrations, `/me` | ⏭ Next  |
+| 3     | Scanner + mock AI → report → history, then the Runware adapter                                     |         |
+| 4     | My Garden                                                                                          |         |
+| 5     | Care tab & notifications                                                                           |         |
+| 6     | Community                                                                                          |         |
+| 7     | Profile & settings                                                                                 |         |
+| 8     | Polish                                                                                             |         |
+| 9     | Release prep                                                                                       |         |
 
 ## Repository layout
 
@@ -38,7 +38,7 @@ apps/
       navigation/         route registry, shared stack options
       dev/                component gallery + fixtures (dev builds only)
     assets/               icon, splash, brand/logo.svg
-  api/                    Next.js 16 App Router, API-only (deployed to Vercel)
+  api/                    Next.js 16 App Router, API-only (runs on the DigitalOcean VPS)
     app/api/              route handlers (health, JSON 404 catch-all)
     lib/                  env (Zod), http helpers (error envelope, route wrapper)
 packages/
@@ -75,17 +75,17 @@ In dev builds: **Profile → Developer menu**, or open `/dev`.
 
 ## Scripts
 
-| Command | What it does |
-|---|---|
-| `pnpm dev` | Expo dev server + Next.js API in parallel |
-| `pnpm dev:mobile` / `pnpm dev:api` | One side only |
-| `pnpm typecheck` | `tsc` in every workspace (mobile regenerates typed routes first) |
-| `pnpm lint` | ESLint everywhere (bans hard-coded colours in the mobile app) |
-| `pnpm test` | Vitest in every workspace |
-| `pnpm check` | typecheck + lint + test |
-| `pnpm format` / `pnpm format:check` | Prettier |
-| `pnpm db:migrate` / `pnpm db:seed` | Placeholders until Phases 2 and 8 |
-| `pnpm --filter @leafy/mobile doctor` | `expo-doctor` |
+| Command                              | What it does                                                     |
+| ------------------------------------ | ---------------------------------------------------------------- |
+| `pnpm dev`                           | Expo dev server + Next.js API in parallel                        |
+| `pnpm dev:mobile` / `pnpm dev:api`   | One side only                                                    |
+| `pnpm typecheck`                     | `tsc` in every workspace (mobile regenerates typed routes first) |
+| `pnpm lint`                          | ESLint everywhere (bans hard-coded colours in the mobile app)    |
+| `pnpm test`                          | Vitest in every workspace                                        |
+| `pnpm check`                         | typecheck + lint + test                                          |
+| `pnpm format` / `pnpm format:check`  | Prettier                                                         |
+| `pnpm db:migrate` / `pnpm db:seed`   | Placeholders until Phases 2 and 8                                |
+| `pnpm --filter @leafy/mobile doctor` | `expo-doctor`                                                    |
 
 ## Environment variables
 
@@ -94,20 +94,14 @@ Each app has a `.env.example`. **Never commit real values.**
 - `apps/mobile/.env.example`: only `EXPO_PUBLIC_API_URL`. Everything `EXPO_PUBLIC_*`
   ships inside the app bundle, so no secrets go there. All AI and storage keys stay on
   the server.
-- `apps/api/.env.example`: Runware, Neon, Blob, Upstash, auth, cron, Expo push, Sentry.
+- `apps/api/.env.example`: Runware, Postgres, Redis, DigitalOcean Spaces, Google sign-in, cron, Expo push, Sentry.
   The API validates them with Zod when they're used (`lib/env.ts`).
 
-## Deploying the API to Vercel
+## Deploying the API
 
-1. Import the repo in Vercel and set **Root Directory = `apps/api`**. Next.js and the
-   pnpm workspace are detected automatically.
-2. Add the Neon, Blob and Upstash integrations from the Vercel Marketplace. They inject
-   `DATABASE_URL`, `BLOB_READ_WRITE_TOKEN` and `UPSTASH_*`.
-3. Add the remaining variables from `apps/api/.env.example`.
-4. `GET /api/health` should return `{ "status": "ok", … }`.
-
-Route handlers that call Runware or process images use the **Node.js runtime**
-(`export const runtime = 'nodejs'`).
+The API runs on the owner's **DigitalOcean VPS** in Docker (API + PostgreSQL + Redis +
+Caddy for HTTPS). Photos are stored in **DigitalOcean Spaces**. See DECISIONS.md
+D-021. Step-by-step server setup arrives with Phase 2.
 
 ## Conventions
 

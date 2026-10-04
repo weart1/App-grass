@@ -10,7 +10,7 @@ export const GET = route(() => {
   const body: HealthResponse = {
     status: 'ok',
     service: `${APP_NAME.toLowerCase()}-api`,
-    version: env().VERCEL_GIT_COMMIT_SHA?.slice(0, 7) ?? 'dev',
+    version: env().GIT_COMMIT_SHA?.slice(0, 7) ?? 'dev',
     time: new Date().toISOString(),
   };
   return json(body, { headers: { 'Cache-Control': 'no-store' } });

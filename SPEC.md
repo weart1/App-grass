@@ -35,6 +35,7 @@ Target: iOS and Android phones. Portrait only.
 ## 2. Tech stack
 
 **Mobile app**
+
 - Expo (latest SDK) + React Native + TypeScript
 - Expo Router (file-based navigation, tabs + stacks + modals)
 - `expo-camera` for the scanner, `expo-image-picker` for gallery upload, `expo-image-manipulator` to resize/compress before upload (max 1600px long side, JPEG ~0.8)
@@ -49,6 +50,7 @@ Target: iOS and Android phones. Portrait only.
 - i18n-ready from day one (`i18next`), English as default; keep all strings in locale files
 
 **Backend (Node.js on Vercel)**
+
 - Next.js (App Router) used as an API-only project deployed on Vercel — route handlers under `app/api/**`. Node.js runtime (not Edge) for routes that call Runware or process images.
 - Database: Postgres via Neon (Vercel Marketplace integration) + Drizzle ORM + drizzle-kit migrations
 - File storage: Vercel Blob (user photos, plant photos, post images). Mobile uploads via signed client upload tokens from the backend.
@@ -59,6 +61,7 @@ Target: iOS and Android phones. Portrait only.
 - AI: **Runware API** via a provider adapter (section 6).
 
 **Repo structure (monorepo, pnpm workspaces)**
+
 ```
 /apps/mobile        Expo app
 /apps/api           Next.js API on Vercel
@@ -67,6 +70,7 @@ Target: iOS and Android phones. Portrait only.
 ```
 
 **Environment variables** (create `.env.example` in each app, never commit real values):
+
 ```
 RUNWARE_API_KEY=
 DATABASE_URL=
@@ -84,32 +88,33 @@ EXPO_PUBLIC_API_URL=    # mobile → backend base URL
 ## 3. Design system
 
 ### 3.1 Mood
+
 Fresh, airy, calm, "morning greenhouse". Lots of white space, soft light-green surfaces, rounded shapes, gentle shadows, friendly illustrations. Never dark or aggressive — except clear red/orange for toxicity warnings.
 
 ### 3.2 Color palette — white + light green
 
-| Token | Hex | Use |
-|---|---|---|
-| `bg` | `#FFFFFF` | Main background |
-| `surface` | `#F5FBF3` | Cards, inputs, sheets |
-| `surfaceAlt` | `#EAF6E6` | Selected chips, section backgrounds, skeletons |
-| `primary50` | `#EEF9EC` | Very light tint (tab-bar active pill, banners) |
-| `primary100` | `#D4F0CE` | Tags, progress track |
-| `primary300` | `#A6DE9B` | Borders of active elements, illustrations |
-| `primary` | `#6CC55C` | Main brand light green — icons, accents, progress fill, large elements |
+| Token           | Hex       | Use                                                                      |
+| --------------- | --------- | ------------------------------------------------------------------------ |
+| `bg`            | `#FFFFFF` | Main background                                                          |
+| `surface`       | `#F5FBF3` | Cards, inputs, sheets                                                    |
+| `surfaceAlt`    | `#EAF6E6` | Selected chips, section backgrounds, skeletons                           |
+| `primary50`     | `#EEF9EC` | Very light tint (tab-bar active pill, banners)                           |
+| `primary100`    | `#D4F0CE` | Tags, progress track                                                     |
+| `primary300`    | `#A6DE9B` | Borders of active elements, illustrations                                |
+| `primary`       | `#6CC55C` | Main brand light green — icons, accents, progress fill, large elements   |
 | `primaryStrong` | `#2F8F3A` | Filled buttons with white text, links, active tab label (meets contrast) |
-| `primaryDeep` | `#1E5E27` | Pressed states, headings on green surfaces |
-| `textPrimary` | `#1C2B1F` | Main text |
-| `textSecondary` | `#5B6B5E` | Secondary text |
-| `textMuted` | `#98A69A` | Placeholders, timestamps |
-| `border` | `#E2ECDF` | Dividers, card borders |
-| `danger` | `#E5484D` | "Highly toxic", destructive actions |
-| `dangerBg` | `#FDECEC` | Danger badge background |
-| `warning` | `#F2A93B` | "Mildly toxic / caution" |
-| `warningBg` | `#FEF4E4` | Warning badge background |
-| `info` | `#3D9BD6` | Watering (water-drop icons), info notes |
-| `infoBg` | `#E8F4FB` | Watering badge background |
-| `sun` | `#F5C542` | Sunlight indicators |
+| `primaryDeep`   | `#1E5E27` | Pressed states, headings on green surfaces                               |
+| `textPrimary`   | `#1C2B1F` | Main text                                                                |
+| `textSecondary` | `#5B6B5E` | Secondary text                                                           |
+| `textMuted`     | `#98A69A` | Placeholders, timestamps                                                 |
+| `border`        | `#E2ECDF` | Dividers, card borders                                                   |
+| `danger`        | `#E5484D` | "Highly toxic", destructive actions                                      |
+| `dangerBg`      | `#FDECEC` | Danger badge background                                                  |
+| `warning`       | `#F2A93B` | "Mildly toxic / caution"                                                 |
+| `warningBg`     | `#FEF4E4` | Warning badge background                                                 |
+| `info`          | `#3D9BD6` | Watering (water-drop icons), info notes                                  |
+| `infoBg`        | `#E8F4FB` | Watering badge background                                                |
+| `sun`           | `#F5C542` | Sunlight indicators                                                      |
 
 Gradients (use sparingly): scan button and onboarding hero `#8BD97C → #4FB04A` (top-left to bottom-right).
 
@@ -118,16 +123,19 @@ Gradients (use sparingly): scan button and onboarding hero `#8BD97C → #4FB04A`
 Dark mode: not in v1, but keep all colors in tokens so it can be added later.
 
 ### 3.3 Typography
+
 - Font: **Inter** (or "Manrope" for headings + Inter for body — pick one approach and be consistent), loaded via `expo-font`.
 - Scale: `display 32/38 bold`, `h1 26/32 bold`, `h2 21/28 semibold`, `h3 17/24 semibold`, `body 15/22 regular`, `bodySmall 13/18 regular`, `caption 12/16 medium`, `button 16/20 semibold`.
 - Support Dynamic Type / font scaling up to 1.3× without breaking layouts.
 
 ### 3.4 Spacing, radius, shadow
+
 - Spacing scale (4-pt): 4, 8, 12, 16, 20, 24, 32, 40, 48. Screen horizontal padding 20.
 - Radius: `sm 10`, `md 16` (cards, inputs), `lg 24` (sheets, big cards), `full 999` (chips, avatars, scan button).
 - Shadow (soft, green-tinted): `0 4 16 rgba(47,143,58,0.08)`; elevated (tab bar, scan button): `0 8 24 rgba(47,143,58,0.18)`.
 
 ### 3.5 Core components (build these first, with a hidden `/dev/components` screen showing all of them)
+
 - `Button` (primary filled, secondary tinted, ghost, destructive; sizes L/M/S; loading state)
 - `IconButton`, `Chip` / `FilterChip`, `Badge` (success/warning/danger/info/neutral)
 - `Card`, `PlantCard` (photo, name, next task), `PostCard`
@@ -143,6 +151,7 @@ Dark mode: not in v1, but keep all colors in tokens so it can be added later.
 - `SegmentedControl` (for tabs inside screens)
 
 ### 3.6 Motion & feedback
+
 - Scan button: idle soft pulse ring (light green, 2s loop); on press → scale 0.92 + haptic.
 - Like: double-tap image → heart burst animation + haptic; heart icon fills.
 - Watering check-off: checkbox fills with a water-drop splash micro-animation.
@@ -154,6 +163,7 @@ Dark mode: not in v1, but keep all colors in tokens so it can be added later.
 ## 4. Navigation
 
 ### 4.1 Bottom tab bar (custom component)
+
 White bar, top border `border`, elevated shadow, 5 slots, safe-area aware:
 
 ```
@@ -167,6 +177,7 @@ White bar, top border `border`, elevated shadow, 5 slots, safe-area aware:
 - The 4th tab ("Care" — calendar of all care tasks) is added so the scan button sits in the exact center. If you think a different 4th tab is better, propose it in `DECISIONS.md`.
 
 ### 4.2 Route map (Expo Router)
+
 ```
 app/
   _layout.tsx                 root providers (Query, Auth, Theme, i18n, Notifications)
@@ -205,6 +216,7 @@ app/
 For each screen implement: loading skeleton, empty state, error state with retry, pull-to-refresh where it's a list, and offline handling (show cached data + banner "You're offline").
 
 ### 5.1 Splash & Onboarding
+
 - **Splash**: white background, Leafy logo (leaf inside a rounded viewfinder) in `primary`, subtle fade-in.
 - **Onboarding (3 slides)**, swipeable, dots indicator, "Skip" top-right:
   1. "Identify any plant in seconds" — illustration of a phone scanning a leaf.
@@ -214,6 +226,7 @@ For each screen implement: loading skeleton, empty state, error state with retry
 - **Permissions screen**: friendly explanation cards for Camera (required for scanning) and Notifications (for watering reminders), each with "Allow" button; user can continue without notifications.
 
 ### 5.2 Auth
+
 - **Sign in**: logo, title "Welcome to Leafy", buttons: Continue with Apple, Continue with Google, Continue with email. Small terms/privacy text.
 - **Email code**: 6-digit OTP input with auto-advance, resend timer (30s).
 - **Profile setup** (first login only): avatar picker, display name, unique @username (live availability check), optional: city/climate zone (used for planting advice), experience level (Beginner / Hobbyist / Expert) as chips.
@@ -221,6 +234,7 @@ For each screen implement: loading skeleton, empty state, error state with retry
 ### 5.3 Scanner (center button) — the core feature
 
 **5.3.1 Camera screen (full-screen modal)**
+
 - Live camera preview, full bleed.
 - Center: rounded-square viewfinder frame with animated light-green corner brackets and a soft scanning line moving top→bottom.
 - Top bar (on translucent dark gradient): close (X), flash toggle, "Tips" (?) icon.
@@ -231,6 +245,7 @@ For each screen implement: loading skeleton, empty state, error state with retry
 - On capture: resize/compress → upload to Blob via signed token → `POST /api/scans` → navigate to Processing.
 
 **5.3.2 Processing screen**
+
 - The captured photo blurred in background, the sharp photo in a rounded card in the center.
 - Animated leaf/progress ring, rotating status text: "Looking at leaf shape…", "Comparing with plant database…", "Checking safety for pets and kids…", "Preparing your report…".
 - Cancel button. Timeout handling (e.g. 30s) → friendly error with "Try again" and tips for a better photo.
@@ -252,14 +267,17 @@ Scrollable screen, large hero photo at top (user's photo) with back + share + sa
 7. **Diagnose mode only**: "Health check" block on top — detected issue (e.g. overwatering, spider mites, fungal leaf spot), severity, causes, step-by-step treatment, prevention.
 8. **Fun fact** card (light green background).
 9. **Sticky bottom bar**: primary button **"Add to My Garden"** + secondary icon buttons "Share to Community" and "Save report".
+
 - "Report wrong result" link at the bottom → small form (correct name, comment) stored for quality review.
 
 **5.3.4 Scan History**
+
 - List grouped by date: thumbnail, plant name, confidence, safety badge. Search + filter chips (All / Toxic / Edible / Diagnoses). Swipe to delete. Tap → result screen (from DB, no re-scan).
 
 ### 5.4 My Garden tab
 
 **5.4.1 Garden home**
+
 - Header: "My Garden" (h1), subtitle "12 plants · 3 tasks today", right: search icon + "+" button.
 - **Today's care strip** (horizontal cards): "Water Basil", "Fertilize Tomato" with quick check buttons. Tap "See all" → Care tab.
 - Filter chips: All · Indoor · Outdoor · Vegetables · Herbs · Flowers · Needs attention. Optional custom "Spaces" (e.g. Balcony, Kitchen, Greenhouse) user can create.
@@ -268,14 +286,17 @@ Scrollable screen, large hero photo at top (user's photo) with back + share + sa
 - Empty state: illustration of an empty pot, "Your garden is empty", buttons "Scan a plant" and "Add manually".
 
 **5.4.2 Add Plant (modal, multi-step)**
+
 1. Photo: take/upload photo (or prefilled from a scan). Option "Identify from photo" calls scan API and pre-fills species.
 2. Species: search field with autocomplete (from previous scans / AI lookup) or "I don't know".
 3. Details: nickname, location/space, indoor/outdoor, pot or ground, **planting date** (date picker, default today), planted as (seed / seedling / cutting / bought plant).
 4. Care schedule: AI-suggested defaults (water every N days, fertilize every N weeks, mist, rotate, repot) shown as editable rows with `Stepper`; preferred reminder time.
 5. Review & save → success animation (sprout growing) → plant card.
+
 - Expected dates (sprouting, flowering, harvest) are calculated from species data + planting date + planted-as, via AI on the backend, and stored.
 
 **5.4.3 Plant Card (detail)** — the heart of the garden
+
 - Hero image carousel (latest photo first) with back, edit, more (⋯: share, move to space, archive, delete).
 - Name + species + space chip + "Planted 34 days ago".
 - **Growth progress block**: `ProgressRing` showing current stage + "Sprouts expected in 3–5 days" / "Flowering in ~2 weeks" / "Harvest window: Aug 10–25". Stage timeline with dots.
@@ -289,6 +310,7 @@ Scrollable screen, large hero photo at top (user's photo) with back + share + sa
 **5.4.4 Edit care schedule** — form with all tasks, frequency steppers, reminder time, season adjustments (e.g. water less in winter toggle).
 
 ### 5.5 Care tab (calendar of tasks)
+
 - Header with week strip (Mon–Sun), selected day highlighted with primary50 circle, dots under days that have tasks.
 - Toggle week / month view.
 - Sections: **Overdue** (danger accent), **Today**, **Upcoming**.
@@ -298,6 +320,7 @@ Scrollable screen, large hero photo at top (user's photo) with back + share + sa
 - Notifications: each task triggers a push at the user's preferred time ("Time to water Basil 💧"); tapping opens the plant card's Care section.
 
 ### 5.6 Community tab (Instagram-like feed)
+
 - Header: "Community" + icons: search, notifications (bell with unread badge), "+" create post.
 - Top segmented: **For you** · **Following** · (optional) **Nearby** (same climate zone).
 - Optional horizontal "stories-like" row of trending topics/challenges (e.g. "#FirstHarvest", "#30DaySprout").
@@ -317,6 +340,7 @@ Scrollable screen, large hero photo at top (user's photo) with back + share + sa
 - Moderation: report post/comment/user (reasons list), block user, basic profanity filter on server, hidden posts after N reports pending review.
 
 ### 5.7 Profile tab
+
 - **My profile**: cover-less clean header — avatar (88pt), display name, @username, bio, city/climate zone, experience badge. Stats row: Posts · Followers · Following · Plants. Buttons: "Edit profile", "Share profile". Settings gear top-right.
 - Segmented tabs:
   1. **Posts** — 3-column grid of my posts (multi-photo icon on thumbnails).
@@ -330,6 +354,7 @@ Scrollable screen, large hero photo at top (user's photo) with back + share + sa
 - **Settings**: account (email, sign-in methods, delete account — required by app stores), notifications (care reminders on/off + time, community activity), privacy (private account, garden visibility), units (°C/°F, metric/imperial), language, help/feedback, terms, privacy policy, about/version, log out.
 
 ### 5.8 Search
+
 - Single search screen with tabs: Plants (from my garden + species), Posts (hashtags), Users. Recent searches, trending hashtags.
 
 ---
@@ -340,8 +365,19 @@ Create `apps/api/lib/ai/` with a provider-agnostic interface:
 
 ```ts
 interface PlantAIProvider {
-  identify(input: { imageUrls: string[]; mode: 'identify' | 'diagnose' | 'toxicity'; locale: string; userContext?: { climateZone?: string } }): Promise<PlantReport>;
-  careSchedule(input: { species: string; plantedAs: string; plantedAt: string; indoor: boolean; climateZone?: string }): Promise<CarePlan>;
+  identify(input: {
+    imageUrls: string[];
+    mode: 'identify' | 'diagnose' | 'toxicity';
+    locale: string;
+    userContext?: { climateZone?: string };
+  }): Promise<PlantReport>;
+  careSchedule(input: {
+    species: string;
+    plantedAs: string;
+    plantedAt: string;
+    indoor: boolean;
+    climateZone?: string;
+  }): Promise<CarePlan>;
 }
 ```
 
@@ -352,6 +388,7 @@ interface PlantAIProvider {
 - Log token/cost usage per request in a `ai_usage` table.
 
 **`PlantReport` schema (in `packages/shared`)** — at minimum:
+
 ```ts
 {
   isPlant: boolean,
@@ -386,6 +423,7 @@ interface PlantAIProvider {
   funFact: string
 }
 ```
+
 - If `isPlant === false`: show a friendly screen "We couldn't find a plant in this photo" with tips.
 - System prompt for the model must instruct: be conservative about edibility/medicinal claims, always lean to the safer side on toxicity when uncertain, respond in the user's locale, return JSON only.
 

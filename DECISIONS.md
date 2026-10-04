@@ -18,20 +18,22 @@ the reason, and what it costs.
 
 ### D-002 · Versions (October 2026)
 
-| Area | Choice | Why |
-|---|---|---|
-| Mobile | **Expo SDK 57** (React Native 0.86.3, React 19.2.3, New Architecture only) | Latest SDK, as SPEC §2 asks |
-| Navigation | **Expo Router 57** | It now vendors react-navigation. Tab types come from `expo-router/tabs` |
-| API | **Next.js 16.3** (App Router, Turbopack), Node runtime | — |
-| Language | **TypeScript ~6.0** (not 7.0) | Expo's template pins `~6.0.3`, and `typescript-eslint` supports `<6.1` |
-| Lint | **ESLint 9** (not 10) | `eslint-plugin-react`, used by both the Expo and Next configs, supports ESLint ≤ 9 |
-| Validation | **Zod 4** | — |
-| Tests | **Vitest 5** | — |
+| Area       | Choice                                                                     | Why                                                                                |
+| ---------- | -------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
+| Mobile     | **Expo SDK 57** (React Native 0.86.3, React 19.2.3, New Architecture only) | Latest SDK, as SPEC §2 asks                                                        |
+| Navigation | **Expo Router 57**                                                         | It now vendors react-navigation. Tab types come from `expo-router/tabs`            |
+| API        | **Next.js 16.3** (App Router, Turbopack), Node runtime                     | —                                                                                  |
+| Language   | **TypeScript ~6.0** (not 7.0)                                              | Expo's template pins `~6.0.3`, and `typescript-eslint` supports `<6.1`             |
+| Lint       | **ESLint 9** (not 10)                                                      | `eslint-plugin-react`, used by both the Expo and Next configs, supports ESLint ≤ 9 |
+| Validation | **Zod 4**                                                                  | —                                                                                  |
+| Tests      | **Vitest 5**                                                               | —                                                                                  |
 
 Native module versions are the ones SDK 57's `bundledNativeModules.json` pins.
 `expo-doctor` passes all of its dependency and version checks.
 
 ### D-003 · Auth provider: **Better Auth** (implemented in Phase 2)
+
+> **Updated (D-022):** sign-in is **Google only** for now. Email codes and Resend are dropped. Apple comes back before the iOS release.
 
 SPEC §2 offers Clerk or Better Auth. We chose **Better Auth**:
 
@@ -48,6 +50,7 @@ SPEC §2 offers Clerk or Better Auth. We chose **Better Auth**:
   `auth.api.getSession` in one `requireUser()` helper.
 
 Trade-offs we accept:
+
 - We send the OTP emails ourselves through **Resend**. This adds `RESEND_API_KEY` and `EMAIL_FROM`.
 - We own rate-limiting and security updates for the auth routes. Upstash handles the rate limits.
 - Apple and Google client setup is manual. The steps will be in the README in Phase 2.
@@ -66,7 +69,7 @@ what it imports, and the lint rules catch most mistakes.
 
 We kept the spec's proposal. Care is the screen people open every day. Its badge
 (tasks due today) drives return visits, and it puts the scan button in the exact centre.
-We considered *Explore/Search* instead, but search already sits in the Garden and
+We considered _Explore/Search_ instead, but search already sits in the Garden and
 Community headers, so a tab for it would duplicate them.
 
 ### D-006 · Typography: Inter only, 4 weights
@@ -79,21 +82,21 @@ and Greek for i18n. Each weight is its own font family because Android ignores
 Fonts are imported **per weight** (`@expo-google-fonts/inter/400Regular`). Importing
 from the package root bundled all 18 Inter files (≈6 MB).
 
-### D-007 · Colour changes for WCAG AA ⚠️ *please review*
+### D-007 · Colour changes for WCAG AA ⚠️ _please review_
 
 SPEC §3.2 requires every text/background pair to meet WCAG AA (4.5:1). We measured
 the palette. Several tokens fail for small text, including `primaryStrong`, which the
 spec says "meets contrast". We kept every spec value for its non-text uses and changed
 the minimum needed:
 
-| Token | Spec | Now | Contrast on white | Notes |
-|---|---|---|---|---|
-| `primaryStrong` | `#2F8F3A` (4.11) | **`#2A7F33`** | 5.02 | Same hue, a little darker. White button text 5.02. On the `primary50` tab pill 4.64. On `surfaceAlt` 4.50 |
-| `textMuted` | `#98A69A` (2.54) | **`#677769`** | 4.75 | Placeholders and timestamps |
-| `textDisabled` | — | `#98A69A` | — | The original muted value, kept for disabled or decorative use only (exempt from WCAG) |
-| `dangerStrong` | — | `#D61E24` | 5.16 | Danger text and filled destructive buttons (white on `danger` was 3.91) |
-| `warningStrong` | — | `#9E630A` | 4.95 | Warning text, including on `warningBg` |
-| `infoStrong` | — | `#2374A7` | 5.09 | "Water today" text, including on `infoBg` |
+| Token           | Spec             | Now           | Contrast on white | Notes                                                                                                     |
+| --------------- | ---------------- | ------------- | ----------------- | --------------------------------------------------------------------------------------------------------- |
+| `primaryStrong` | `#2F8F3A` (4.11) | **`#2A7F33`** | 5.02              | Same hue, a little darker. White button text 5.02. On the `primary50` tab pill 4.64. On `surfaceAlt` 4.50 |
+| `textMuted`     | `#98A69A` (2.54) | **`#677769`** | 4.75              | Placeholders and timestamps                                                                               |
+| `textDisabled`  | —                | `#98A69A`     | —                 | The original muted value, kept for disabled or decorative use only (exempt from WCAG)                     |
+| `dangerStrong`  | —                | `#D61E24`     | 5.16              | Danger text and filled destructive buttons (white on `danger` was 3.91)                                   |
+| `warningStrong` | —                | `#9E630A`     | 4.95              | Warning text, including on `warningBg`                                                                    |
+| `infoStrong`    | —                | `#2374A7`     | 5.09              | "Water today" text, including on `infoBg`                                                                 |
 
 - `danger`, `warning`, `info` and `primary` keep their spec values for icons, fills,
   meters and borders.
@@ -216,3 +219,39 @@ writing `RunwareProvider`. `AI_PROVIDER=mock` is already in the env schema.
   is a placeholder. Use a reverse-DNS name you own before the first EAS build.
 - The product name is in one place: `packages/shared/brand.json` (also read by
   `app.config.ts`).
+
+---
+
+## Phase 2 planning (owner's direction)
+
+### D-021 · Hosting on a DigitalOcean VPS instead of Vercel
+
+The owner already has a DigitalOcean VPS, so the API runs there rather than on Vercel
+(a departure from SPEC §2). The Vercel-specific services are replaced:
+
+| SPEC (Vercel)               | Now (VPS)                                                                                             |
+| --------------------------- | ----------------------------------------------------------------------------------------------------- |
+| Vercel serverless functions | `next start` (Node.js server) in Docker                                                               |
+| Neon Postgres               | PostgreSQL in Docker on the same VPS, with daily backups                                              |
+| Upstash Redis               | Redis in Docker on the same VPS (`REDIS_URL`)                                                         |
+| Vercel Blob                 | **DigitalOcean Spaces** (S3-compatible, `S3_*` variables). Photos stay off the VPS disk and get a CDN |
+| Vercel Cron                 | A scheduler inside the server (or system cron) calling `/api/cron/reminders`                          |
+| Automatic HTTPS             | **Caddy** reverse proxy with free Let's Encrypt certificates (needs a domain)                         |
+
+Everything is described in one `docker-compose.yml`, built in Phase 2 together with the
+server setup. A domain name is required: iOS refuses plain-HTTP API calls, and HTTPS
+certificates are issued per domain.
+
+### D-022 · Sign-in: Google only (for now)
+
+The owner wants quick Google sign-in only. The mobile app uses the native Google
+Sign-In sheet, gets a Google ID token, and sends it to Better Auth. Better Auth checks it
+against our Google client IDs and creates a session.
+
+- Needs 3 OAuth clients in Google Cloud Console: **Web** (the API verifies tokens with it),
+  **iOS** (bundle ID) and **Android** (package + SHA-1 of the signing key).
+- Native Google Sign-In doesn't run in Expo Go, so from Phase 2 the app runs as an
+  **Expo development build** (made with EAS Build).
+- ⚠️ **App Store rule 4.8:** an iOS app that offers Google sign-in must also offer
+  _Sign in with Apple_ (or an equivalent private option). We'll add Apple before the
+  iOS release (Phase 9). Android has no such rule.
