@@ -11,6 +11,7 @@ import { useEffect } from 'react';
 
 import { OfflineBannerHost, ToastHost } from '@/components';
 import { BrandSplash } from '@/components/layout/BrandSplash';
+import { AgentationHost } from '@/dev/AgentationHost';
 import '@/i18n';
 import { useStackScreenOptions } from '@/navigation/useStackScreenOptions';
 import { AppProviders } from '@/providers/AppProviders';
@@ -41,6 +42,7 @@ export default function RootLayout() {
       <OfflineBannerHost />
       <ToastHost />
       <BrandSplash />
+      <AgentationHost />
     </AppProviders>
   );
 }
